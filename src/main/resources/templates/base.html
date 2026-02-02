@@ -1,0 +1,11 @@
+<div class="parent-fragement"
+th:fragment="parent(content)">
+  <h1>This is parent fragment</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, cupiditate?</p>
+  <div th:replace="${content}"></div>
+</div>
+
+<div th:fragment="test(content)">
+  <h1>This is testing fragement</h1>
+  <div th:replace="${content}"></div>
+</div>
