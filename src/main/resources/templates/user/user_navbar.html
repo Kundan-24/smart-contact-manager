@@ -1,0 +1,106 @@
+<nav th:fragment="user_navbar"
+     class="fixed top-0 left-0 right-0 z-50
+            h-16 bg-white dark:bg-gray-900
+            border-b border-gray-200 dark:border-gray-700
+            shadow-sm lg:pl-64">
+
+    <div class="h-full px-4 lg:px-6">
+
+        <div class="flex items-center justify-between h-full">
+
+            <!-- LEFT SECTION -->
+            <div class="flex items-center gap-3">
+
+                <!-- MOBILE MENU BUTTON -->
+                <button data-drawer-target="logo-sidebar"
+                        data-drawer-toggle="logo-sidebar"
+                        aria-controls="logo-sidebar"
+                        type="button"
+                        class="inline-flex items-center justify-center
+                               w-10 h-10 rounded-lg
+                               text-gray-600 dark:text-gray-300
+                               hover:bg-gray-100 dark:hover:bg-gray-800
+                               focus:outline-none focus:ring-2
+                               focus:ring-blue-500 lg:hidden">
+
+                    <span class="sr-only">Open sidebar</span>
+
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+
+                <!-- LOGO -->
+                <a th:href="@{'/'}"
+                   class="flex items-center gap-3">
+
+                    <img th:src="@{'/images/telephone.png'}"
+                         class="w-9 h-9 rounded-full shadow object-cover"
+                         alt="SCM Logo">
+
+                    <span class="text-xl md:text-2xl font-bold
+                                 text-gray-800 dark:text-white">
+
+                        SCM
+                    </span>
+                </a>
+
+            </div>
+
+            <!-- RIGHT SECTION -->
+            <div class="flex items-center gap-2 md:gap-3">
+
+                <!-- THEME BUTTON -->
+                <button id="theme_change_button"
+                        class="flex items-center gap-2
+                               px-3 py-2 rounded-xl
+                               bg-gray-100 hover:bg-gray-200
+                               dark:bg-gray-800 dark:hover:bg-gray-700
+                               text-sm font-medium
+                               text-gray-700 dark:text-gray-200
+                               transition">
+
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+
+                    <span class="hidden sm:block">
+                        Theme
+                    </span>
+                </button>
+
+                <!-- PROFILE -->
+                <a th:href="@{'/user/profile'}"
+                   class="hidden md:flex items-center gap-2
+                          px-4 py-2 rounded-xl
+                          bg-blue-600 hover:bg-blue-700
+                          text-white text-sm font-medium
+                          transition shadow">
+
+                    <img th:src="${loggedInUser.profilePic}"
+                         onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'"
+                         class="w-7 h-7 rounded-full object-cover">
+
+                    <span th:text="${loggedInUser.name}">
+                        User
+                    </span>
+                </a>
+
+                <!-- LOGOUT -->
+                <a th:href="@{'/logout'}"
+                   class="hidden md:flex items-center gap-2
+                          px-4 py-2 rounded-xl
+                          bg-red-600 hover:bg-red-700
+                          text-white text-sm font-medium
+                          transition shadow">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>
+                        Logout
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

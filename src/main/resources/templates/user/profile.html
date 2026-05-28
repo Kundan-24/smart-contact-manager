@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+
+<head>
+    <title th:text="${loggedInUser.name} + ' | SCM'">Profile</title>
+</head>
+
+<body>
+
+<div id="content">
+
+    <!-- SIDEBAR -->
+    <div th:replace="~{user/sidebar :: sidebar}"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-20 lg:ml-64 min-h-screen bg-gray-100 dark:bg-gray-950">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+            <!-- PROFILE CARD -->
+            <div class="bg-white dark:bg-gray-900
+                        rounded-3xl shadow-xl
+                        overflow-hidden
+                        border border-gray-200 dark:border-gray-700">
+
+                <!-- COVER -->
+                <div class="h-44 sm:h-52 lg:h-60
+                            bg-gradient-to-r
+                            from-blue-600 via-indigo-600 to-purple-600">
+                </div>
+
+                <!-- CONTENT -->
+                <div class="px-4 sm:px-8 pb-8">
+
+                    <!-- TOP SECTION -->
+                    <div class="flex flex-col lg:flex-row
+                                lg:items-end lg:justify-between">
+
+                        <!-- PROFILE INFO -->
+                        <div class="flex flex-col sm:flex-row sm:items-center">
+
+                            <!-- IMAGE -->
+                            <img th:src="${loggedInUser.profilePic}"
+                                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'"
+                                 class="w-32 h-32 sm:w-36 sm:h-36
+                                        rounded-full object-cover
+                                        border-4 border-white dark:border-gray-900
+                                        shadow-xl
+                                        -mt-16 sm:-mt-20
+                                        bg-white">
+
+                            <!-- TEXT -->
+                            <div class="mt-4 sm:mt-0 sm:ml-6">
+
+                                <h1 class="text-2xl sm:text-3xl font-bold
+                                           text-gray-800 dark:text-white"
+                                    th:text="${loggedInUser.name}">
+
+                                    Kundan Kumar
+                                </h1>
+
+                                <p class="mt-1 text-gray-500 dark:text-gray-400 break-all"
+                                   th:text="${loggedInUser.email}">
+
+                                    user@gmail.com
+                                </p>
+
+                                <!-- BADGES -->
+                                <div class="flex flex-wrap gap-3 mt-4">
+
+                                    <!-- PROVIDER -->
+                                    <span class="inline-flex items-center
+                                                 px-4 py-1.5 rounded-full
+                                                 text-sm font-medium
+                                                 bg-blue-100 text-blue-700
+                                                 dark:bg-blue-900 dark:text-blue-300">
+
+                                        <i class="fa-solid fa-shield-halved mr-2"></i>
+
+                                        <span th:text="${loggedInUser.provider}">
+                                            SELF
+                                        </span>
+
+                                    </span>
+
+                                    <!-- STATUS -->
+                                    <span th:classappend="${loggedInUser.enabled}
+                                                          ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                                                          : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'"
+                                          class="inline-flex items-center
+                                                 px-4 py-1.5 rounded-full
+                                                 text-sm font-medium">
+
+                                        <i class="fa-solid fa-circle-check mr-2"></i>
+
+                                        <span th:text="${loggedInUser.enabled}
+                                                        ? 'Active Account'
+                                                        : 'Disabled Account'">
+                                        </span>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ACTION BUTTON -->
+                        <div class="mt-6 lg:mt-0">
+
+                            <button class="w-full sm:w-auto
+                                           px-6 py-3 rounded-2xl
+                                           bg-blue-600 hover:bg-blue-700
+                                           text-white font-medium
+                                           shadow-md transition">
+
+                                <i class="fa-solid fa-pen mr-2"></i>
+                                Edit Profile
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ABOUT -->
+                    <div class="mt-10">
+
+                        <h2 class="text-xl font-semibold
+                                   text-gray-800 dark:text-white mb-3">
+
+                            About
+                        </h2>
+
+                        <div class="bg-gray-50 dark:bg-gray-800
+                                    rounded-2xl p-5">
+
+                            <p class="text-gray-600 dark:text-gray-300
+                                      leading-relaxed"
+                               th:text="${loggedInUser.about}">
+
+                                Passionate Java Developer...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- INFO GRID -->
+                    <div class="grid grid-cols-1
+                                md:grid-cols-2
+                                xl:grid-cols-3
+                                gap-5 mt-10">
+
+                        <!-- USER ID -->
+                        <div class="bg-gray-50 dark:bg-gray-800
+                                    rounded-2xl p-5">
+
+                            <div class="flex items-center gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl
+                                            flex items-center justify-center
+                                            bg-indigo-100 dark:bg-indigo-900">
+
+                                    <i class="fa-solid fa-id-card
+                                              text-indigo-600 dark:text-indigo-300 text-xl"></i>
+                                </div>
+
+                                <div>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                        User ID
+                                    </p>
+
+                                    <h3 class="text-lg font-semibold
+                                               text-gray-800 dark:text-white"
+                                        th:text="${loggedInUser.userId}">
+                                        1
+                                    </h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PHONE -->
+                        <div class="bg-gray-50 dark:bg-gray-800
+                                    rounded-2xl p-5">
+
+                            <div class="flex items-center gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl
+                                            flex items-center justify-center
+                                            bg-green-100 dark:bg-green-900">
+
+                                    <i class="fa-solid fa-phone
+                                              text-green-600 dark:text-green-300 text-xl"></i>
+                                </div>
+
+                                <div>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                        Phone Number
+                                    </p>
+
+                                    <h3 class="text-lg font-semibold
+                                               text-gray-800 dark:text-white"
+                                        th:text="${loggedInUser.phoneNumber}">
+                                        +91 9876543210
+                                    </h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- EMAIL VERIFIED -->
+                        <div class="bg-gray-50 dark:bg-gray-800
+                                    rounded-2xl p-5">
+
+                            <div class="flex items-center gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl
+                                            flex items-center justify-center
+                                            bg-blue-100 dark:bg-blue-900">
+
+                                    <i class="fa-solid fa-envelope-circle-check
+                                              text-blue-600 dark:text-blue-300 text-xl"></i>
+                                </div>
+
+                                <div>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                        Email Verification
+                                    </p>
+
+                                    <h3 th:classappend="${loggedInUser.emailVarified}
+                                                        ? 'text-green-600'
+                                                        : 'text-red-500'"
+                                        class="text-lg font-semibold">
+
+                                        <span th:text="${loggedInUser.emailVarified}
+                                                        ? 'Verified'
+                                                        : 'Not Verified'">
+                                        </span>
+
+                                    </h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PHONE VERIFIED -->
+                        <div class="bg-gray-50 dark:bg-gray-800
+                                    rounded-2xl p-5">
+
+                            <div class="flex items-center gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl
+                                            flex items-center justify-center
+                                            bg-yellow-100 dark:bg-yellow-900">
+
+                                    <i class="fa-solid fa-mobile-screen-button
+                                              text-yellow-600 dark:text-yellow-300 text-xl"></i>
+                                </div>
+
+                                <div>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                        Phone Verification
+                                    </p>
+
+                                    <h3 th:classappend="${loggedInUser.phoneVarified}
+                                                        ? 'text-green-600'
+                                                        : 'text-red-500'"
+                                        class="text-lg font-semibold">
+
+                                        <span th:text="${loggedInUser.phoneVarified}
+                                                        ? 'Verified'
+                                                        : 'Not Verified'">
+                                        </span>
+
+                                    </h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PROVIDER -->
+                        <div class="bg-gray-50 dark:bg-gray-800
+                                    rounded-2xl p-5">
+
+                            <div class="flex items-center gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl
+                                            flex items-center justify-center
+                                            bg-pink-100 dark:bg-pink-900">
+
+                                    <i class="fa-solid fa-key
+                                              text-pink-600 dark:text-pink-300 text-xl"></i>
+                                </div>
+
+                                <div>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                        Provider ID
+                                    </p>
+
+                                    <h3 class="text-sm sm:text-base font-semibold
+                                               text-gray-800 dark:text-white break-all"
+                                        th:text="${loggedInUser.providerId}">
+
+                                        provider-id
+                                    </h3>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+    console.log("Responsive Profile Page Loaded");
+</script>
+
+</body>
+</html>

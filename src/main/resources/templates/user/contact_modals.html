@@ -1,0 +1,51 @@
+<div th:fragment="contactModal">
+    <div id="view_contact__modal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 dark:bg-black/60 p-4">
+        <!-- Card -->
+        <div class="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-start">
+                <div>
+                    <h3 id="contact_name" class="text-lg font-bold text-gray-900 dark:text-white"></h3>
+                    <p id="contact_email" class="text-xs text-gray-500 dark:text-gray-400"></p>
+                </div>
+                <button type="button" data-modal-hide="view_contact__modal" class="text-gray-500 hover:text-red-500 text-lg"> ✕ </button>
+            </div>
+
+            <!-- Body -->
+            <div class="p-4 space-y-4 text-sm">
+                <!-- Avatar -->
+                <div class="flex items-center gap-3">
+                    <img id="contact_image" class="w-14 h-14 rounded-full object-cover border" src="" onerror="this.src='https://ui-avatars.com/api/?name=User&background=random'"/>
+                    <div>
+                        <div id="contact_favorite" class="text-yellow-500 text-xs font-semibold"></div>
+                    </div>
+                </div>
+                <!-- Info -->
+                <div class="space-y-2">
+                    <div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-800">
+                        <p class="text-xs text-gray-500">Phone</p>
+                        <p id="contact_phone" class="text-gray-900 dark:text-white font-medium"></p>
+                    </div>
+                    <div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-800">
+                        <p class="text-xs text-gray-500">Address</p>
+                        <p id="contact_address" class="text-gray-900 dark:text-white font-medium"></p>
+                    </div>
+                    <div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-800">
+                        <p class="text-xs text-gray-500">Description</p>
+                        <p id="contact_description" class="text-gray-900 dark:text-white font-medium"></p>
+                    </div>
+                </div>
+                <!-- Links -->
+                <div class="flex gap-2 pt-2">
+                    <a id="contact_linkedin" target="_blank" class="flex-1 text-center px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs"> LinkedIn </a>
+                    <a id="contact_website" target="_blank" class="flex-1 text-center px-3 py-1.5 rounded-lg bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-xs"> Website </a>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="p-3 border-t border-gray-200 dark:border-gray-700 flex justify-end">
+                <button data-modal-hide="view_contact__modal" class="px-3 py-1.5 text-sm rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

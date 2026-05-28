@@ -1,33 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      th:replace="~{base ::parent(~{::#content}, ~{::title},~{::script})}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" data-th-href="@{'/CSS/output.css'}">
-    <style>
-        .container{
-            margin: auto;
-            width: 50%;
-            padding: 30px;
-            background: #e2e2e2;
-        }
-    </style>
+  <title>Home | Smart Contact Manager</title>
 </head>
+
 <body>
-    <div class=" bg-gray-200 w-1/2 p-4 flex flex-col justify-center items-center space-y-3 mx-auto mt-4">
-     <h1 class="text-2xl font-bold" data-th-text="${name}">Welcome to home page</h1>
-     <p class="text-xl text-gray-700">Role:<span data-th-text="${role}"></span></p>
-      <p>Instagram:<span th:text="${instaid}"></span>   </p>
-      <a data-th-href="${instaid}">Click here to open</a>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt magni totam debitis voluptate accusantium ipsa voluptatem ex, illum enim quisquam.</p>
-        <div>        
-            <button class="px-3 py-3 rounded bg-blue-700 text-white hover:bg-blue-600">Click Here</button>
-       </div>
+
+<div id="content">
+
+  <!-- HERO SECTION -->
+  <section class="rounded-2xl shadow-lg p-8 md:p-16
+                bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
+
+    <!-- TEXT -->
+    <div class="flex-1">
+
+      <h1 class="text-3xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-white">
+        Manage Your Contacts
+        <span class="text-blue-600 dark:text-blue-400">Smarter & Faster</span>
+      </h1>
+
+      <p class="mt-4 text-gray-600 dark:text-gray-300 text-sm md:text-lg">
+        Smart Contact Manager helps you store, organize and manage contacts securely with modern UI.
+      </p>
+
+      <div class="mt-6 flex gap-4 flex-wrap">
+
+        <a href="/login"
+           class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+          Get Started
+        </a>
+
+        <a href="/register"
+           class="border border-gray-400 dark:border-gray-600 px-6 py-3 rounded-lg
+                  text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+          Create Account
+        </a>
+
+      </div>
+
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
+    <!-- IMAGE -->
+    <div class="flex-1 flex justify-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/2343/2343694.png"
+           class="w-64 md:w-96"
+           alt="hero">
+    </div>
+
+  </div>
+
+</section>
+
+  <!-- FEATURES -->
+  <section class="mt-12">
+
+    <h2 class="text-2xl md:text-4xl font-bold text-center text-gray-800 dark:text-white">
+      Why Choose SCM?
+    </h2>
+
+    <p class="text-center text-gray-600 dark:text-gray-400 mt-2">
+      Everything you need to manage contacts efficiently
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+
+      <!-- Card 1 -->
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow hover:shadow-xl transition border dark:border-gray-700">
+        <i class="fa-solid fa-cloud text-blue-600 text-3xl"></i>
+        <h3 class="text-xl font-semibold mt-3">Cloud Storage</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          Save your contacts securely on cloud with instant access anytime.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow hover:shadow-xl transition border dark:border-gray-700">
+        <i class="fa-solid fa-magnifying-glass text-green-600 text-3xl"></i>
+        <h3 class="text-xl font-semibold mt-3">Smart Search</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          Quickly find contacts using name, email or phone number.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow hover:shadow-xl transition border dark:border-gray-700">
+        <i class="fa-solid fa-shield-halved text-purple-600 text-3xl"></i>
+        <h3 class="text-xl font-semibold mt-3">Secure & Safe</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          Your data is encrypted and protected with Spring Security.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA SECTION -->
+  <section class="mt-16 bg-gray-100 dark:bg-gray-900 rounded-2xl p-10 text-center border dark:border-gray-700">
+
+    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
+      Ready to organize your contacts?
+    </h2>
+
+    <p class="text-gray-600 dark:text-gray-400 mt-2">
+      Join SCM and make contact management effortless.
+    </p>
+
+    <div class="mt-6">
+      <a href="/register"
+         class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+        Start Now
+      </a>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+  console.log("Home page loaded");
+</script>
+
 </body>
 </html>

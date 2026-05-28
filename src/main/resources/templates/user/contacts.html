@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base ::parent(~{::#content}, ~{::title}, ~{::script})}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contacts</title>
+    </head>
+    <body>
+        <div id="content">
+            <!-- sidebar -->
+            <!-- is user logged in : sidebar -->
+            <div th:if="${loggedInUser}">
+                <div th:replace="~{user/sidebar :: sidebar}"></div>
+            </div>
+            <div class="sm:pl-64">
+                <div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl text-center">All Your Contacts</h1>
+                    <p class="text-center">List of contacts</p>
+                    <div class="contacts_container p-5">
+                        <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+                            <div class="flex items-center gap-3 justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 p-4">
+                                <!-- Search box -->
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4">
+                                    <form th:action="@{/user/contacts}" method="get" class="flex items-center gap-2 w-full sm:w-auto">
+                                        <input type="text" name="keyword" th:value="${keyword}" class="block w-full sm:max-w-96 ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-default-medium text-sm rounded-base" placeholder="Search by name, email or phone">
+                                        <input type="hidden" name="pageNum" value="0">
+                                        <input type="hidden" name="pageSize" th:value="${pageContact.size}">
+                                        <button type="submit" class="px-3 py-2 bg-blue-500 text-white rounded-base hover:bg-blue-600">Search</button>
+                                    </form>
+                                    <!-- Export -->
+                                    <div class="flex justify-end w-full sm:w-auto">
+                                        <a th:href="@{/user/contacts/export}" class="px-3 py-2 bg-green-500 text-white rounded-base hover:bg-green-600">Export</a>
+                                    </div>
+                                </div>
+                                <!-- Contact List -->
+                                <table id="contact-table" class="min-w-[700px] w-full text-sm text-left">
+                                    <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-t border-default-medium">
+                                        <tr>  
+                                            <th scope="col" class="px-6 py-3 font-medium">NAME</th>
+                                            <th scope="col" class="px-6 py-3 font-medium">PHONE</th>
+                                            <th scope="col" class="px-6 py-3 font-medium">LINKS</th>
+                                            <th scope="col" class="px-6 py-3 font-medium">Action</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <!-- Empty list message -->
+                                        <tr th:if="${pageContact.totalElements == 0}">
+                                            <td colspan="4" class="py-16 text-center">
+                                                <div class="flex flex-col items-center justify-center text-gray-500">
+                                                    <!-- Icon -->
+                                                    <div class="bg-gray-100 p-4 rounded-full mb-3">
+                                                        <i class="fa-solid fa-magnifying-glass text-3xl text-gray-400"></i>
+                                                    </div>
+                                                    <!-- Title -->
+                                                    <h3 class="text-lg font-semibold text-gray-700">No contacts found</h3>
+                                                    <!-- Subtitle -->
+                                                    <p class="text-sm text-gray-500 mt-1">Try adjusting your search or check spelling</p>   
+                                                    <!-- Optional action -->
+                                                    <a th:href="@{/user/contacts}" class="mt-4 px-4 py-2 text-sm bg-blue-500 text-white rounded-base hover:bg-blue-600 transition">Clear Search</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr th:each="c :${pageContact.getContent()}" th:object="${c}" class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+                                            <th scope="row" class="flex items-center px-6 py-4 text-heading whitespace-nowrap">
+                                                <!-- Image -->
+                                                <img onerror="this.src='https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg'"
+                                                    th:src="@{*{picture}}" class="w-10 h-10 rounded-full" alt="">
+                                                <!-- Name & Email -->
+                                                <div class="ps-3">
+                                                    <div th:text="*{name}" class="text-base font-semibold"></div>
+                                                    <div th:text="*{email}" class="font-normal text-body"></div>
+                                                </div>  
+                                            </th>
+                                            <!-- Phone Number -->
+                                            <td class="px-6 py-4">
+                                                <i class="fa-solid fa-phone w-4 h-4"></i>
+                                                <span th:text="*{phoneNumber}"></span>
+                                            </td>
+                                            <!-- Link -->
+                                            <td class="px-6 py-4">
+                                                <div class="flex items-center">
+                                                    <div th:if="*{favorite}" class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> 
+                                                    <a th:href="@{*{linkedInLink}}" target="_blank"> <i class="fa-brands fa-linkedin w-5 h-5"></i></a> 
+                                                    <a th:href="@{*{websiteLink}}" target="_blank"> <i class="fa-solid fa-globe w-5 h-5"></i></a>
+                                                </div>
+                                            </td>
+                                            <!-- View & Update & Delete -->
+                                            <td class="px-6 py-4">
+                                                <div>
+                                                    <button th:data-id="${c.id}" th:onclick="loadContactdata([[${c.id}]])"><i class="fa-solid w-5 h-5 fa-eye"></i></button>
+                                                    <a th:href="@{'/user/contacts/view/'+*{id}}"> <i class="fa-solid w-5 h-5 fa-pen"></i></a>
+                                                    <button th:onclick="deleteContact([[${c.id}]])"> <i class="fa-regular w-5 h-5 fa-trash-can"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- pagination component -->
+                                <div th:if="${pageContact.totalElements > 0}" class="pagination_container p-5 w-full flex justify-center">
+                                    <nav class="w-full flex justify-center">
+                                        <ul class="flex items-center gap-1 text-sm mx-auto">
+                                            <!-- Previous -->
+                                            <li th:if="${!pageContact.first}">
+                                                <a th:href="@{'/user/contacts?pageNum=' + ${pageContact.number - 1} + '&pageSize=' + ${pageContact.size} + '&keyword=' + ${keyword != null ? keyword : ''}}" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-s-base text-sm px-3 h-10 focus:outline-none">Previous</a>
+                                            </li>
+                                            <!-- page no -->
+                                            <li th:each="index: ${#numbers.sequence(0,pageContact.totalPages - 1)}">
+                                                <a th:href="@{'/user/contacts?pageNum='+${index} + '&pageSize=' + ${pageContact.size} + '&keyword=' + ${keyword != null ? keyword : ''}}" th:classappend="${index == pageContact.number} ? 'bg-blue-500 text-white' : ''" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-10 h-10 focus:outline-none">
+                                                    <span th:text="${index + 1}"></span>
+                                                </a>
+                                            </li>
+                                            <!-- Next -->
+                                            <li th:if="${!pageContact.last}">
+                                                <a th:href="@{'/user/contacts?pageNum=' + ${pageContact.number + 1} + '&pageSize=' + ${pageContact.size} + '&keyword=' + ${keyword != null ? keyword : ''}}" class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-e-base text-sm px-3 h-10 focus:outline-none">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- View PopUp -->
+                <div th:replace="~{user/contact_modals :: contactModal}"></div>
+            </div>
+        </div>
+        <script th:src="@{/js/contact_modal.js}"></script>
+        <script>
+            console.log("contact page");
+        </script>
+    </body>
+</html>

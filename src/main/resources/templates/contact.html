@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="~{base ::parent(~{::#content}, ~{::title},~{::script})}">
+
+<head>
+  <title>Contact Us - SCM</title>
+</head>
+
+<body>
+
+<div id="content">
+
+  <!-- HERO -->
+  <section class="max-w-6xl mx-auto px-4 py-10 md:py-16">
+
+    <div class="text-center">
+
+      <h1 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white">
+        Get in <span class="text-blue-600">Touch</span>
+      </h1>
+
+      <p class="mt-4 text-gray-600 dark:text-gray-300">
+        Have questions? We are here to help you anytime.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="max-w-6xl mx-auto px-4 pb-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+
+    <!-- CONTACT INFO -->
+    <div class="space-y-6">
+
+      <div class="p-6 bg-white dark:bg-gray-900 border rounded-2xl shadow">
+
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          Contact Information
+        </h2>
+
+        <div class="space-y-4 text-gray-600 dark:text-gray-300">
+
+          <p class="flex items-center gap-3">
+            <i class="fa-solid fa-envelope text-blue-500"></i>
+            support@scm.com
+          </p>
+
+          <p class="flex items-center gap-3">
+            <i class="fa-solid fa-phone text-green-500"></i>
+            +91 98765 43210
+          </p>
+
+          <p class="flex items-center gap-3">
+            <i class="fa-solid fa-location-dot text-red-500"></i>
+            India
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="p-6 bg-blue-600 text-white rounded-2xl shadow">
+
+        <h3 class="text-lg font-semibold">Need Quick Help?</h3>
+        <p class="text-sm mt-2 text-blue-100">
+          We usually respond within 24 hours.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- CONTACT FORM (DYNAMIC) -->
+    <div class="bg-white dark:bg-gray-900 border rounded-2xl shadow p-6">
+
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+        Send Message
+      </h2>
+
+      <!-- FORM -->
+      <div th:replace="~{message::messagebox}"></div> 
+      <form th:action="@{/contact}"
+            th:object="${contactMessage}"
+            method="post"
+            class="space-y-4">
+
+        <!-- Name -->
+        <input type="text"
+               th:field="*{name}"
+               placeholder="Your Name"
+               class="w-full p-3 rounded-xl border dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500">
+
+        <!-- Email -->
+        <input type="email"
+               th:field="*{email}"
+               placeholder="Your Email"
+               class="w-full p-3 rounded-xl border dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500">
+
+        <!-- Message -->
+        <textarea rows="5"
+                  th:field="*{message}"
+                  placeholder="Your Message"
+                  class="w-full p-3 rounded-xl border dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"></textarea>
+
+        <!-- ERROR DISPLAY -->
+        <div th:if="${#fields.hasErrors('*')}"
+             class="text-red-500 text-sm space-y-1">
+
+          <p th:each="err : ${#fields.errors('*')}"
+             th:text="${err}">
+          </p>
+
+        </div>
+
+        <!-- BUTTON -->
+        <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow">
+          Send Message
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER CTA -->
+  <section class="text-center pb-12">
+
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+      We’re always here to help you 🚀
+    </h2>
+
+    <p class="text-gray-600 dark:text-gray-400 mt-2">
+      Contact us for any support related to SCM platform.
+    </p>
+
+  </section>
+
+</div>
+
+<script>
+  console.log("Contact page loaded");
+</script>
+
+</body>
+</html>

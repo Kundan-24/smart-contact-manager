@@ -1,11 +1,98 @@
-<div class="parent-fragement"
-th:fragment="parent(content)">
-  <h1>This is parent fragment</h1>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, cupiditate?</p>
-  <div th:replace="${content}"></div>
-</div>
+<!DOCTYPE html>
+<html  lang="en" th:fragment="parent(content,title,script)" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-th-replace="${title}">SCM</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Tailwind output -->
+    <link rel="stylesheet" data-th-href="@{'/CSS/output.css'}">
+    <!-- Custom css -->
+    <link rel="stylesheet" data-th-href="@{'/CSS/style.css'}">
+  </head>
+  <!-- class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300" -->
+  <body class="min-h-screen flex flex-col overflow-x-hidden bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- common header -->
+    <!-- is user logged in : navbar -->
+    <div th:if="${loggedInUser}">
+      <div data-th-replace="~{user/user_navbar :: user_navbar}"></div>
+    </div>
 
-<div th:fragment="test(content)">
-  <h1>This is testing fragement</h1>
-  <div th:replace="${content}"></div>
-</div>
+    <!-- is user not logged in : navbar -->
+    <div th:unless="${loggedInUser}">
+      <div data-th-replace="~{navbar :: navbar}"> </div>
+    </div>
+     
+    <!-- main content -->
+    <main class="p-4 pt-24">
+      <section th:replace="${content}"></section>
+    </main>
+
+    <!-- common footer -->
+    <!-- common footer (ONLY for non-logged-in users) -->
+<footer th:unless="${loggedInUser}"
+        class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-auto">
+
+  <div class="max-w-screen-xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+    <!-- Brand -->
+    <div>
+      <h2 class="text-xl font-bold text-blue-600 dark:text-blue-400">
+        SCM
+      </h2>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-3">
+        Smart Contact Manager helps you manage your contacts efficiently with cloud sync and security.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+        <li><a href="/" class="hover:text-blue-500">Home</a></li>
+        <li><a href="/login" class="hover:text-blue-500">Login</a></li>
+        <li><a href="/register" class="hover:text-blue-500">Register</a></li>
+      </ul>
+    </div>
+
+    <!-- Features -->
+    <div>
+      <h3 class="text-lg font-semibold mb-3">Features</h3>
+      <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+        <li>Contact Management</li>
+        <li>Cloud Image Upload</li>
+        <li>Email Verification</li>
+        <li>Search & Export</li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h3 class="text-lg font-semibold mb-3">Contact</h3>
+      <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+        <li>Email: support@scm.com</li>
+        <li>Phone: +91 9876543210</li>
+        <li>Location: India</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="border-t border-gray-200 dark:border-gray-700">
+    <div class="max-w-screen-xl mx-auto px-4 py-4 text-center text-sm text-gray-600 dark:text-gray-400">
+      © 2026 SCM. All rights reserved.
+    </div>
+  </div>
+
+</footer>
+
+    <!-- flow bite content -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script data-th-src="@{'/js/script.js'}"></script>
+    <th:block data-th-replace="${script}"></th:block>
+  </body>
+</html>
