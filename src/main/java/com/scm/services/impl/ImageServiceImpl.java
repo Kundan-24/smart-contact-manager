@@ -25,14 +25,13 @@ public class ImageServiceImpl implements ImageService{
     @Override
     public String uploadImage(MultipartFile contactImage, String filename) {
         try {
-            byte[] data = new byte[contactImage.getInputStream().available()];
-            contactImage.getInputStream().read(data);
+            byte[] data = contactImage.getBytes();
             cloudinary.uploader().upload(data, ObjectUtils.asMap(
                                         "public_id", filename
             ));  
         return this.getUrlFromPublicId(filename);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Image upload failed ",e);
             return null;
         }
         

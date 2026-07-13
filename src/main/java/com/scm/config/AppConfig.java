@@ -23,9 +23,9 @@ public class AppConfig {
     public Cloudinary cloudinary(){
 
         return new Cloudinary(
-            ObjectUtils.asMap("cloud_name", "dsq3xgsz7",
-                            "api_key", "326679917339829",
-                            "api_secret", "26Qsjgw_Bush6mZVP_VY4LiXaNY"
+            ObjectUtils.asMap("cloud_name", cloudName,
+                            "api_key", apiKey,
+                            "api_secret", apiSecret
             )
         );
     }
