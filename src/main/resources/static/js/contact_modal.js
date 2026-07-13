@@ -25,7 +25,7 @@ function fixUrl(url) {
  
 async function loadContactdata(id){
     try {
-        const response = await fetch(`http://localhost:9090/api/contacts/${id}`);
+        const response = await fetch(`/api/contacts/${id}`);
         const data = await response.json();
 
         console.log(data);
