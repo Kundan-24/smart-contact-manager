@@ -18,9 +18,9 @@
                     <p class="text-center">List of contacts</p>
                     <div class="contacts_container p-2 sm:p-5 w-full">
                         <div class="relative w-full overflow-hidden bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-                            <div class="p-4">
+                            <div class=" p-4">
                                 <!-- Search box -->
-                                <div class="flex flex-col md:flex-row  justify-between gap-4">
+                                <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-3 w-full">
                                     <form th:action="@{/user/contacts}" method="get" class="flex flex-col sm:flex-row gap-2 w-full">
                                         <input type="text" name="keyword" th:value="${keyword}" class="block w-full sm:max-w-96 ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-default-medium text-sm rounded-base" placeholder="Search by name, email or phone">
                                         <input type="hidden" name="pageNum" value="0">
@@ -33,8 +33,8 @@
                                     </div>
                                 </div>
                                 <!-- Contact List -->
-                                <div class="overflow-x-auto">
-                                <table id="contact-table" class="w-full table-auto">
+                                <div class="overflow-x-auto w-full">
+                                <table id="contact-table" class="min-w-[700px] w-full text-sm text-left">
                                     <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-t border-default-medium">
                                         <tr>  
                                             <th scope="col" class="px-6 py-3 font-medium">NAME</th>
@@ -99,7 +99,7 @@
                                 </table>
                                 </div>
                                 <!-- pagination component -->
-                                <div th:if="${pageContact.totalElements > 0}" class="pagination_container">
+                                <div th:if="${pageContact.totalElements > 0}" class="pagination_container p-5 w-full flex justify-center">
                                     <nav class="w-full flex justify-center">
                                         <ul class="flex items-center gap-1 text-sm mx-auto">
                                             <!-- Previous -->
