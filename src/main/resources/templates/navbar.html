@@ -8,9 +8,21 @@
     <!-- end of brand Logo -->
     <div class="flex items-center gap-2 md:order-2 rtl:space-x-reverse">
       <!-- dark light theme button -->
-      <button id="theme_change_button" class="bg-gray-200 px-3 py-2 rounded-lg  dark:bg-gray-600">
-        <i class="fa-solid fa-circle-half-stroke"></i><span>Light</span>
-      </button>
+      <button id="theme_change_button"
+                        class="flex items-center gap-2
+                               px-3 py-2 rounded-xl
+                               bg-gray-100 hover:bg-gray-200
+                               dark:bg-gray-800 dark:hover:bg-gray-700
+                               text-sm font-medium
+                               text-gray-700 dark:text-gray-200
+                               transition">
+
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+
+                    <span class="hidden sm:block">
+                        Theme
+                    </span>
+                </button>
 
       <a data-th-href="@{'/login'}" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
       <a data-th-href="@{'/register'}" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Signup</a>
