@@ -57,7 +57,7 @@ public class User implements UserDetails{
 
    //information
    @Getter(value = AccessLevel.NONE)
-   private boolean enabled=false;
+   private boolean enabled=true;
    private boolean emailVarified = false;
    private boolean phoneVarified = false;
 
