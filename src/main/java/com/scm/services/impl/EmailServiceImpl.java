@@ -13,6 +13,9 @@ import com.scm.services.EmailService;
 @Service
 public class EmailServiceImpl implements EmailService {
 
+    @Value("${spring.mail.username}")
+    private String fromEmail;
+
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -20,13 +23,17 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendEmail(String to, String subject, String body) {
-      SimpleMailMessage message = new SimpleMailMessage();
-      message.setTo(to);
-      message.setSubject(subject);
-      message.setText(body);
-      message.setFrom("pr3734345@gmail.com");
-      javaMailSender.send(message);
-      logger.info("Email Sent Successfully");
+      try {
+          SimpleMailMessage message = new SimpleMailMessage();
+          message.setTo(to);
+          message.setSubject(subject);
+          message.setText(body);
+          message.setFrom(fromEmail);
+          javaMailSender.send(message);
+          logger.info("Email Sent Successfully");
+      } catch (Exception e) {
+          logger.error("Email sending failed : ",e);
+      }
     }
         
 
